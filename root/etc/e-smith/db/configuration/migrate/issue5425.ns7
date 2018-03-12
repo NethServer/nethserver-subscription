@@ -1,0 +1,10 @@
+{
+    #
+    # issue5425.ns7
+    #
+    my $AlertsAutoUpdates = $DB->get_prop_and_delete('nethupdate', 'AlertsAutoUpdates') || '';
+    if($AlertsAutoUpdates) {
+        $DB->set_prop('subscription', 'AlertsAutoUpdates', $AlertsAutoUpdates);
+    }
+    '';
+}
