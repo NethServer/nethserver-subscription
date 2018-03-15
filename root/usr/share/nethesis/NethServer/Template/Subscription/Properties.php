@@ -38,6 +38,7 @@ $view->includeCss("
 
     #regForm input {
         width: 64ch;
+        font-family: monospace;
     }
 
     .subscriptionInfo {
@@ -48,7 +49,6 @@ $view->includeCss("
 
     #subscriptionPlans p {
         margin: 5px;
-        padding: 20px;
         font-size: 120%;
         line-height: 1.5;
         text-align: justify;
@@ -56,36 +56,27 @@ $view->includeCss("
     }
 
     #subscriptionPlans {
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 50px;
-        width: 80em;
-        padding: 20px;
+        max-width: 716px;
+        margin-bottom: 2em;
+        padding: 8px;
         background: linear-gradient(to right, #eee, white);
         border-left: 8px solid #00719a;
     }
-
-    .paste {
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 120%;
-        line-height: 1.5;
-        padding: 10px;
-        margin-bottom: 20px;
-    }
-
 
     .subscriptionInfo .strong {
         font-weight: bold;
     }
 
-    #regNowBtn {
+    #subscriptionPlans .Buttonlist {
+        text-align: center;
+        margin: 12px 0;
+    }
+
+    #subscriptionPlans #regNowBtn {
         color: white;
         border: 1px solid #00425b;
         text-transform: uppercase;
         background: #00719a;
-        float: right;
-        margin-right: 50px;
     }
 
     div.register_spacer {
