@@ -5,7 +5,12 @@
     $systemId = $subscription{'SystemId'} || $nethupdate{'SystemID'} || "";
 
     if ($systemId ne "") {
-        $OUT = $subscription{'NsRelease'} || $nethupdate{'NsRelease'} || '';
+        my $defaultRelease = do {
+            open my $nsh, "<", '/etc/e-smith/db/configuration/force/sysconfig/Version';
+            <$nsh>;
+        };
+        chomp($defaultRelease);
+        $OUT = $subscription{'NsRelease'} || $nethupdate{'NsRelease'} || $defaultRelease;
     } else {
         $OUT = '';
     }
