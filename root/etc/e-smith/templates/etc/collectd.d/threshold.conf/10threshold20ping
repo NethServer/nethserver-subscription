@@ -7,15 +7,8 @@
         foreach my $key ($alertsdb->get_all_by_prop('type' => $plugin)) {
             my $PluginType = $key->prop('PluginType') || next;
             my $Instance = $key->prop('Instance') || next;
-            my $FailureMax = $key->prop('FailureMax') || '';
+            my $FailureMax = $key->prop('FailureMax') || next;
             my $Interesting = $key->prop('Interesting') || 'false';
-            if ($FailureMax eq '') {
-                if ($PluginType eq 'ping') {
-                    $FailureMax = '200';
-                } elsif ($PluginType eq 'ping_droprate') {
-                    $FailureMax = '0.1';
-                }
-            }
             my $Histeresis = sprintf('%.2f', $FailureMax * 0.1);
 
             $OUT .= "    <Plugin \"$plugin\">\n";
