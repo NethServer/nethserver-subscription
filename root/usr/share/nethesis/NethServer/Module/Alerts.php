@@ -65,7 +65,7 @@ class Alerts extends \Nethgui\Controller\TableController
         $alarms = $this->getPlatform()->getDatabase('alerts')->getAll();
         foreach($alarms as $alarm => $props) {
             $loader[$alarm] = array(
-                'Type' => $props['type'],
+                'Type' => isset($props['PluginType']) ? $props['PluginType'] : $props['type'],
                 'Instance' => $props['Instance'],
                 'FailureMin' => $props['FailureMin'],
                 'FailureMax' => $props['FailureMax'],
