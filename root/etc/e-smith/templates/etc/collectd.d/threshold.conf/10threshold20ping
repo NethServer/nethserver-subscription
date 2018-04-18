@@ -16,13 +16,14 @@
                     $FailureMax = '0.1';
                 }
             }
+            my $Histeresis = sprintf('%.2f', $FailureMax * 0.1);
 
             $OUT .= "    <Plugin \"$plugin\">\n";
             $OUT .= "        <Type \"$PluginType\">\n";
             $OUT .= "            Instance \"$Instance\"\n";
             $OUT .= "            FailureMax $FailureMax\n";
             $OUT .= "            Hits 30\n";
-            $OUT .= "            Hysteresis 30\n";
+            $OUT .= "            Hysteresis $Histeresis\n";
             $OUT .= "            Interesting $Interesting\n";
             $OUT .= "        </Type>\n";
             $OUT .= "    </Plugin>\n";
