@@ -65,7 +65,8 @@ class Alerts extends \Nethgui\Controller\TableController
         $alarms = $this->getPlatform()->getDatabase('alerts')->getAll();
         foreach($alarms as $alarm => $props) {
             $loader[$alarm] = array(
-                'Type' => isset($props['PluginType']) ? $props['PluginType'] : $props['type'],
+                'Type' => $props['type'],
+                'PluginType' => $props['PluginType'],
                 'Instance' => $props['Instance'],
                 'FailureMin' => $props['FailureMin'],
                 'FailureMax' => $props['FailureMax'],
@@ -83,7 +84,6 @@ class Alerts extends \Nethgui\Controller\TableController
                return $view->translate("Partition_label").": /".$values['Instance'];
             case "swap":
                return '-';
-            case "ping_droprate":
             case "ping":
                return $view->translate("Host_label").": ".$values['Instance'];
             default:
@@ -99,10 +99,12 @@ class Alerts extends \Nethgui\Controller\TableController
             case "df":
             case "swap":
                return  $view->translate("min_fail_label").": ".$values['FailureMin']." %";
-            case "ping_droprate":
-               return  $view->translate("max_fail_label").": ".( $values['FailureMax']*100 )." %";
             case "ping":
-               return $view->translate("max_fail_label").": ".$values['FailureMax']." ms";
+                if($values['PluginType'] == 'ping_droprate') {
+                    return $view->translate("max_fail_label").": " . ( $values['FailureMax'] * 100 ) . " %";
+                } else {
+                    return $view->translate("max_fail_label").": ".$values['FailureMax'] . " ms";
+                }
             default:
                return '-';
         }
@@ -111,6 +113,9 @@ class Alerts extends \Nethgui\Controller\TableController
 
     public function prepareViewForColumnType(\Nethgui\Controller\Table\Read $action, \Nethgui\View\ViewInterface $view, $key, $values, &$rowMetadata)
     {
+        if($values['Type'] == 'ping') {
+            return $view->translate($values['PluginType']."_label");
+        }
         return $view->translate($values['Type']."_label");
     }
 
