@@ -38,7 +38,6 @@ event_templates('nethserver-subscription-update', qw(
 
 event_actions('nethserver-subscription-update', qw(
       initialize-default-databases 00
-      nethserver-subscription-eorepo 30
 ));
 
 event_services('nethserver-subscription-update', qw(
