@@ -143,7 +143,6 @@ event_actions('pre-restore-config', qw(
 # software-repos-save event
 #
 event_templates('software-repos-save', qw(
-    /etc/yum/vars/nsrelease
     /etc/yum.repos.d/subscription.repo
 ));
 
