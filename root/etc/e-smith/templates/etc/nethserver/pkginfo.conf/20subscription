@@ -1,6 +1,6 @@
 {
     #
-    # 00template_vars
+    # 20subscription
     #
     my $systemId = $subscription{'SystemId'} || '';
     my $secret = $subscription{'Secret'} || '';
@@ -9,11 +9,6 @@
     if($enabled) {
         @repo_list = qw(
             sb-nethserver-updates
-        );
-    } else {
-        @repo_list = qw(
-            nethserver-updates
-            nethforge
         );
     }
     '';

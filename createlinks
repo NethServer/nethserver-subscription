@@ -34,7 +34,6 @@ event_templates('nethserver-subscription-update', qw(
     /etc/collectd.d/threshold.conf
     /etc/collectd.d/filter.conf
     /etc/collectd.d/ping.conf
-    /etc/nethserver/pkginfo.conf
 ));
 
 event_actions('nethserver-subscription-update', qw(
@@ -60,7 +59,6 @@ event_templates('nethserver-subscription-save', qw(
     /etc/yum/vars/nsrelease
     /etc/sysconfig/run-parts
     /etc/collectd.d/threshold.conf
-    /etc/nethserver/pkginfo.conf
 ));
 
 event_services('nethserver-subscription-save', qw(
