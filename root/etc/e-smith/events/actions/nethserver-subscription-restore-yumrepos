@@ -48,5 +48,5 @@ if [[ -z ${systemId} ]]; then
 fi
 
 echo "[NOTICE] This system is subscribed as ${systemId}. Restoring YUM repository configuration"
-/sbin/e-smith/signal-event restore-yumrepos
+/sbin/e-smith/signal-event software-repos-save
 

@@ -1,0 +1,21 @@
+{
+    #
+    # 20subscription
+    # Enable only subscription repositiores 
+    #
+    $systemId = $subscription{'SystemId'} || '';
+    if ($systemId ne '') {
+        @repos = (
+            "sb-base",
+            "sb-updates",
+            "sb-epel",
+            "sb-extras",
+            "sb-centos-sclo-rh",
+            "sb-centos-sclo-sclo",
+            "sb-nethserver-base",
+            "sb-nethserver-updates",
+        );
+    }
+
+    '';
+}

@@ -30,24 +30,8 @@ if [[ -z ${systemId} ]]; then
     exit 0
 fi
 
-# Override default repositories with eorepo.conf
-eorepo_cfg=/etc/nethserver/eorepo.conf
-if [[ -r ${eorepo_cfg} ]]; then
-    repositories=($(grep -vE '^#' ${eorepo_cfg}))
-fi
+# Make sure NsReleaseLock is disabled
+/sbin/e-smith/config setprop sysconfig NsReleaseLock disabled
 
-if [[ ${#repositories[@]} -eq 0 ]]; then
-    repositories=(
-        sb-base
-        sb-updates
-        sb-epel
-        sb-extras
-        sb-centos-sclo-rh
-        sb-centos-sclo-sclo
-        sb-nethserver-base
-        sb-nethserver-updates
-    )
-fi
-
-echo "[NOTICE] eorepo ${repositories[*]}"
-exec /sbin/e-smith/eorepo ${repositories[*]}
+echo "[NOTICE] This system is subscribed as ${systemId}. Fixing YUM repository configuration"
+/sbin/e-smith/signal-event software-repos-save

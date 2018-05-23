@@ -29,5 +29,4 @@ if [[ -z ${systemId} ]]; then
     exit 0
 fi
 exec >/dev/null
-/etc/e-smith/events/actions/nethserver-subscription-yum-cleanall
 /etc/e-smith/events/actions/nethserver-subscription-eorepo
