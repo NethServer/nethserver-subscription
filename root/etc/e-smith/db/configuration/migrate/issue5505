@@ -1,0 +1,14 @@
+{
+    #
+    # Issue 5505
+    # Disable NsReleaseLock on registered machines
+    #
+
+    my $systemId = $subscription{'SystemId'} || '';
+    if ($systemId ne '') {
+        $DB->set_prop('sysconfig','NsReleaseLock','disabled');
+    }
+
+    '';
+}
+
