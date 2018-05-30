@@ -130,13 +130,6 @@ event_services('nethserver-alerts-save', qw(
 
 
 #
-# pre-restore-config event
-#
-event_actions('pre-restore-config', qw(
-    nethserver-subscription-restore-yumrepos 20
-));
-
-#
 # software-repos-save event
 #
 event_templates('software-repos-save', qw(
