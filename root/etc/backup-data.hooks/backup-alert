@@ -1,0 +1,59 @@
+#!/usr/bin/perl -w
+
+#
+# Copyright (C) 2018 Nethesis S.r.l.
+# http://www.nethesis.it - support@nethesis.it
+#
+# This script is part of NethServer.
+#
+# NethServer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License,
+# or any later version.
+#
+# NethServer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with NethServer.  If not, see <http://www.gnu.org/licenses/>.
+#
+use strict;
+use Errno;
+use esmith::ConfigDB;
+use IO::Socket::UNIX;
+
+my $backup = $ARGV[0] || '';
+my $exit_code = $ARGV[3] || '';
+
+my $severity = $exit_code eq 0 ? 'okay' : 'failure';
+my $instance = $backup eq 'backup-data' ? 'backup' : "backup-$backup";
+
+# get conf
+my $conf = esmith::ConfigDB->open || exit (2);
+my $hostname = $conf->get('SystemName')->value();
+
+# open socket
+my $sock_path = '/var/run/collectd.sock';
+my $socket = IO::Socket::UNIX->new(
+    Type => SOCK_STREAM(),
+    Peer => $sock_path,
+) || exit(1);
+
+# sleep random
+sleep(int(rand(10)));
+
+
+# write on collectd socket
+my $timestamp = time();
+print "$hostname $timestamp $severity\n";
+
+$socket->send("PUTNOTIF host=$hostname plugin=system plugin_instance=$instance type=failure severity=$severity time=$timestamp message=\"backup state is $severity\"\n");
+
+# wait for response
+my $buf;
+$socket->recv($buf, 1024);
+$socket->close();
+
+exit (0);
