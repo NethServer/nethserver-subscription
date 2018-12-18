@@ -30,7 +30,7 @@
 secret=$1
 
 if [ -z "$secret" ]; then
-    echo "No secret given!"
+    echo -n "{}"
     exit 1
 fi
 
