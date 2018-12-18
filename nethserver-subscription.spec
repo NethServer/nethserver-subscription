@@ -23,6 +23,7 @@ Requires: nethserver-lib
 Requires: python-requests
 Requires: curl
 Requires: puppet-agent
+Requires: jq
 
 %description
 NethServer Subscriptions

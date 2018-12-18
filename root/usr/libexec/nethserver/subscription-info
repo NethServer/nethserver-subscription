@@ -1,0 +1,72 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2018 Nethesis S.r.l.
+# http://www.nethesis.it - nethserver@nethesis.it
+#
+# This script is part of NethServer.
+#
+# NethServer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License,
+# or any later version.
+#
+# NethServer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with NethServer.  If not, see COPYING.
+#
+
+#
+# Retrieve server info from remote subscription manager,
+# also save SystemId to esmith database
+#
+# Usage: subscription-info <secret>
+#
+
+secret=$1
+
+if [ -z "$secret" ]; then
+    echo "No secret given!"
+    exit 1
+fi
+
+url=$(/sbin/e-smith/config getprop subscription ApiUrl | sed 's/\/$//')
+json=$(mktemp)
+curl="curl -s -L --connect-timeout 5 -o $json"
+
+function cleanup
+{
+    rm -f $json 2>/dev/null
+}
+
+trap cleanup EXIT
+
+echo $url | grep -q 'nethesis'
+
+if [ $? -eq 0 ]; then
+    # enterprise endpoint
+    $curl -X POST -H "Content-type: application/json" -H "Accept: application/json" -d "{\"secret\": \"$secret\"}" "$url/systems/info" >/dev/null
+else
+    # community endpoint
+    $curl -H "Content-type: application/json" -H "Authorization: token $secret" "$url/machine/info" >/dev/null
+fi
+
+if [ $? -gt 0 ]; then
+    echo "[ERROR] Request to $url failed"
+    exit 1
+fi
+
+uuid=$(cat $json | jq -r ".uuid" 2>/dev/null)
+
+if [ "$uuid" == "null" ] || [ -z "$uuid" ]; then
+    echo -n "{}"
+    exit 1
+else
+    /sbin/e-smith/config setprop subscription SystemId "$uuid" 2>/dev/null
+    cat $json
+    exit 0
+fi
