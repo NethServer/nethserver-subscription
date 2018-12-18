@@ -54,9 +54,9 @@ class Subscription extends \Nethgui\Controller\CompositeController
         if(isset($result)) {
             return $result;
         }
-        $p = $this->getPlatform()->exec("/usr/bin/sudo -n /usr/libexec/nethserver/subscription-info");
+        $p = $this->getPlatform()->exec("/usr/bin/sudo /usr/libexec/nethserver/subscription-info $secret");
         if ($p->getExitCode() > 0) {
-            $this->getLog()->warning(sprintf("%s::%s URL: %s, HTTP status %s: %s", __CLASS__, __FUNCTION__, $url, $http_code, $response));
+            $this->getLog()->warning(sprintf("%s::%s subscription-info exit code: %i", __CLASS__, __FUNCTION__, $url, $p->getExitCode()));
             $result = FALSE;
         }  else {
             $result = json_decode($p->getOutput(), TRUE);
