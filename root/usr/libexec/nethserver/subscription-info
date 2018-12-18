@@ -21,8 +21,7 @@
 #
 
 #
-# Retrieve server info from remote subscription manager,
-# also save SystemId to esmith database
+# Retrieve server info from remote subscription manager
 #
 # Usage: subscription-info <secret>
 #
@@ -66,7 +65,6 @@ if [ "$uuid" == "null" ] || [ -z "$uuid" ]; then
     echo -n "{}"
     exit 1
 else
-    /sbin/e-smith/config setprop subscription SystemId "$uuid" 2>/dev/null
     cat $json
     exit 0
 fi
