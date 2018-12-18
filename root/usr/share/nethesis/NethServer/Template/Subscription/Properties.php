@@ -3,9 +3,11 @@
 echo $view->header()->setAttribute('template', $T('Subscription_header'));
 
 $printPlanInfo = function ($label, $value) use ($T, $view) {
-    echo "<div><span class='label'>" . htmlspecialchars($T($label)) . ": </span>";
-    echo $view->textLabel($value)->setAttribute('class', 'strong');
-    echo "</div>\n";
+    if (isset($view[$value]) && $view[$value]) {
+        echo "<div><span class='label'>" . htmlspecialchars($T($label)) . ": </span>";
+        echo $view->textLabel($value)->setAttribute('class', 'strong');
+        echo "</div>\n";
+    }
 };
 
 echo "<div class='subscriptionInfo'>";

@@ -37,13 +37,21 @@ class Properties extends \Nethgui\Controller\AbstractController implements \Neth
         $secret = $this->getPlatform()->getDatabase('configuration')->getProp('subscription','Secret');
         if($secret) {
             $plan = $this->getParent()->readSubscriptionPlan($secret);
-            $created = new \DateTime($plan['created']);
-            $from = new \DateTime($plan['subscription']['valid_from']);
-            $until = new \DateTime($plan['subscription']['valid_until']);
-            $view['Created'] = $created->format('Y-m-d');
-            $view['Validity'] = $from->format('Y-m-d') . " - " . $until->format('Y-m-d');
-            $view['PlanName'] = $plan['subscription']['subscription_plan']['name'];
-            $view['PublicIp'] = $plan['public_ip'];
+            if (isset($plan['created'])) {
+                $created = new \DateTime($plan['created']);
+                $view['Created'] = $created->format('Y-m-d');
+            }
+            if (isset($plan['subscription']['valid_from']) && isset($plan['subscription']['valid_until'])) {
+                $from = new \DateTime($plan['subscription']['valid_from']);
+                $until = new \DateTime($plan['subscription']['valid_until']);
+                $view['Validity'] = $from->format('Y-m-d') . " - " . $until->format('Y-m-d');
+            }
+            if (isset($plan['subscription']['subscription_plan']['name'])) {
+                $view['PlanName'] = $plan['subscription']['subscription_plan']['name'];
+            }
+            if (isset($plan['public_ip'])) {
+                $view['PublicIp'] = $plan['public_ip'];
+            }
         }
         
         if($this->getRequest()->hasParameter('registerSuccess')) {
