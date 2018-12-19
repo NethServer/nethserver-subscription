@@ -11,7 +11,7 @@ $printPlanInfo = function ($label, $value) use ($T, $view) {
 };
 
 echo "<div class='subscriptionInfo'>";
-$printPlanInfo('SystemId_label', 'SystemId');
+echo "<div><span class='label'>" . htmlspecialchars($T('SystemId_label')) . ": </span>".$view->textLabel('SystemId')->setAttribute('class', 'strong')."</div>\n";
 $printPlanInfo('Created_label', 'Created');
 $printPlanInfo('PublicIp_label', 'PublicIp');
 echo "<div style='height: 20px'></div>";
