@@ -26,12 +26,9 @@
 
 event=$1
 systemId=$(/sbin/e-smith/config getprop subscription SystemId)
-if [[ -z ${systemId} ]]; then
-    exit 0
+if [[ ! -z ${systemId} ]]; then
+    # Make sure NsReleaseLock is disabled
+    /sbin/e-smith/config setprop sysconfig NsReleaseLock disabled
 fi
 
-# Make sure NsReleaseLock is disabled
-/sbin/e-smith/config setprop sysconfig NsReleaseLock disabled
-
-echo "[NOTICE] This system is subscribed as ${systemId}. Fixing YUM repository configuration"
 /sbin/e-smith/signal-event software-repos-save
