@@ -24,11 +24,4 @@
 # NethServer Subscription
 #
 
-event=$1
-systemId=$(/sbin/e-smith/config getprop subscription SystemId)
-if [[ -n "${systemId}" ]]; then
-    # Make sure NsReleaseLock is disabled
-    /sbin/e-smith/config setprop sysconfig NsReleaseLock disabled
-fi
-
-/sbin/e-smith/signal-event software-repos-save
+exec /sbin/e-smith/signal-event software-repos-save
