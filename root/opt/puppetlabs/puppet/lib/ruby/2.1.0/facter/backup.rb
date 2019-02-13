@@ -9,7 +9,7 @@ Facter.add('backup') do
             # Find most recent log file
             log_file = Dir.glob("/var/log/backup/backup-backup-data-*").max_by {|f| File.mtime(f)}
             backup['last'] = {}
-            backup['last']['type'] = Facter::Core::Execution.exec('/sbin/e-smith/config getprop backup-data VFSType')
+            backup['last']['type'] = Facter::Core::Execution.exec('/sbin/e-smith/db backups getprop backup-data VFSType')
             # If no log has been found, facter will catch the exception
             File.open(log_file, 'rb') do |f|
                 while line = f.gets
