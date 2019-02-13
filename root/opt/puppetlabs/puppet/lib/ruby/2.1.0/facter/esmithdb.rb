@@ -14,7 +14,7 @@ Facter.add('esmithdb') do
                if item['props']
                    item['props'].each do |key, value|
                        # Hide the value of secrets or passwords
-                       if (/password/i =~ key or /secret/i =~ key) and (data[index]['props'][key] != "")
+                       if (/password/i =~ key or /secret/i =~ key or /psk/i =~ key) and (data[index]['props'][key] != "")
                            data[index]['props'][key] = "***"
                        end
                    end
