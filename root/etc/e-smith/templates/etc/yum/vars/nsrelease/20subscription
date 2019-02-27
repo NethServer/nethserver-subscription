@@ -5,7 +5,7 @@
     $systemId = $subscription{'SystemId'} || $nethupdate{'SystemID'} || "";
 
     if ($systemId ne "") {
-        $release = $subscription{'NsRelease'} || $nethupdate{'NsRelease'} || $defaultRelease;
+        $release = $subscription{'NsRelease'} || $nethupdate{'NsRelease'} || $release;
     }
 
     '';
