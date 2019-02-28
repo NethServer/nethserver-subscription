@@ -5,7 +5,17 @@
     $systemId = $subscription{'SystemId'} || $nethupdate{'SystemID'} || "";
 
     if ($systemId ne "") {
-        $release = $subscription{'NsRelease'} || $nethupdate{'NsRelease'} || $release;
+        my $nextRelease = do {
+            # Read from filesystem because the config DB can be overridden
+            # by the "pre-restore-config" event:
+            open my $nsh, "<", '/etc/e-smith/db/configuration/force/subscription/NsRelease';
+            <$nsh>;
+        };
+        chomp $nextRelease;
+
+        # Override the system release with the next release number to
+        # start an automatic system upgrade:
+        $release = $nextRelease || $release;
     }
 
     '';
