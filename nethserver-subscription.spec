@@ -7,8 +7,6 @@ URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
 BuildArch: noarch
 
-Provides: nethserver-inventory = %{version}
-Obsoletes: nethserver-inventory < %{version}
 Provides: nethserver-alerts = %{version} 
 Obsoletes: nethserver-alerts < %{version}
 
@@ -22,8 +20,8 @@ Requires: nethserver-collectd
 Requires: nethserver-lib
 Requires: python-requests
 Requires: curl
-Requires: puppet-agent
 Requires: jq
+Requires: %{name}-inventory = %{version}-%{release}
 
 %description
 NethServer Subscriptions
@@ -39,7 +37,7 @@ cp -a lib/nethserver_alerts.py root%{python2_sitelib}
 
 %install
 (cd root; find . -depth -print | cpio -dump %{buildroot})
-%{genfilelist} %{buildroot} > filelist
+%{genfilelist} --ignoredir '/opt' --ignorefile '/etc/cron.daily/nethserver-inventory' %{buildroot} > filelist
 
 # 1. Split UI parts from core package
 grep -E ^%{_nsuidir}/ filelist > filelist-ui
@@ -57,13 +55,16 @@ sed -i '/Alerts/ d' filelist-ui
 
 %package ui
 Summary: NethServer Subscriptions UI
+%ifarch x86_64
 Requires: %{name} = %{version}-%{release}
+%endif
 %description ui
 NethServer Subscriptions UI
 %files ui -f filelist-ui
 %defattr(-,root,root)
 %doc COPYING
 %doc README.rst
+
 
 %changelog
 * Tue Oct 01 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.5.0-1
