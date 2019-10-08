@@ -2,7 +2,7 @@
 
 Summary: NethServer Subscriptions inventory agent
 Name: nethserver-subscription-inventory
-Version: 4.0.0
+Version: 3.5.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/nethserver-subscription
@@ -39,6 +39,3 @@ cp -av root/opt %{buildroot}/opt
 %doc COPYING
 %doc README.rst
 
-%changelog
-* Tue  8 Oct 2019 Davide Principi <davide.principi@nethesis.it>
-- Initial release
