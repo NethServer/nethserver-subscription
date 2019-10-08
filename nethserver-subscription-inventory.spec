@@ -30,7 +30,11 @@ install -m 0755 -D -T root/etc/cron.daily/nethserver-inventory %{buildroot}/etc/
 cp -av root/opt %{buildroot}/opt
 (cd %{buildroot}; find . -type f | sed 's/^\.//' ) > %{name}-filelist
 
+%ifarch x86_64
 %files -f %{name}-filelist
+%else
+%files
+%endif
 %defattr(-,root,root)
 %doc COPYING
 %doc README.rst
