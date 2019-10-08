@@ -62,9 +62,7 @@ sed -i '/Alerts/ d' filelist-ui
 
 %package ui
 Summary: NethServer Subscriptions UI
-%ifarch x86_64
 Requires: %{name} = %{version}-%{release}
-%endif
 %description ui
 NethServer Subscriptions UI
 %files ui -f filelist-ui
