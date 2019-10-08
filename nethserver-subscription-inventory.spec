@@ -7,6 +7,7 @@ Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/nethserver-subscription
 Source0: %{name}-%{version}.tar.gz
+BuildRequires: nethserver-devtools
 
 %ifarch x86_64
 Requires: puppet-agent
@@ -23,18 +24,24 @@ day to a centralized server
 %setup -q
 
 %build
-# noop
+mkdir createlinks.d
+(cd createlinks.d; perl ../createlinks-inventory)
 
 %install
-install -m 0755 -D -T root/etc/cron.daily/nethserver-inventory %{buildroot}/etc/cron.daily/nethserver-inventory
-cp -av root/opt %{buildroot}/opt
-(cd %{buildroot}; find . -type f | sed 's/^\.//' ) > %{name}-filelist
-
+touch %{name}-filelist
 %ifarch x86_64
-%files -f %{name}-filelist
-%else
-%files
+install -m 0755 -D -T root/etc/cron.daily/nethserver-inventory %{buildroot}/etc/cron.daily/nethserver-inventory
+install -m 0755 -D -T root/usr/sbin/nethserver-inventory %{buildroot}/usr/sbin/nethserver-inventory
+install -m 0755 -D -T root/usr/sbin/ardad %{buildroot}/usr/sbin/ardad
+install -m 0755 -D -T root/etc/e-smith/events/actions/nethserver-inventory-send %{buildroot}/etc/e-smith/events/actions/nethserver-inventory-send
+cp -av root/opt %{buildroot}/opt
+(cd %{buildroot}; find . -type f | sed 's/^\.//' ) >> %{name}-filelist
+
+(cd createlinks.d/root; find . -depth -print | cpio -dump %{buildroot})
+(cd createlinks.d/root; find . -not -type d | sed 's/^\.//' ) >> %{name}-filelist
 %endif
+
+%files -f %{name}-filelist
 %defattr(-,root,root)
 %doc COPYING
 %doc README.rst

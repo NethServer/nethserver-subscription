@@ -50,7 +50,6 @@ event_services('nethserver-subscription-update', qw(
 
 event_actions('nethserver-subscription-save', qw(
       nethserver-subscription-eorepo 30
-      nethserver-inventory-send 30
 ));
 
 event_templates('nethserver-subscription-save', qw(
@@ -135,14 +134,6 @@ event_services('nethserver-alerts-save', qw(
 event_templates('software-repos-save', qw(
     /etc/yum.repos.d/subscription.repo
 ));
-
-#
-# post-restore-data event
-#
-event_actions('post-restore-data', qw(
-    nethserver-inventory-send 95
-));
-
 
 #
 # system-init event
