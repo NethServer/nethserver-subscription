@@ -37,6 +37,13 @@ if [ -z "$secret" ]; then
     exit 1
 fi
 
+# XXX Prevent the accidental registration of systems running
+#     on unsupported architectures.
+if [[ $(uname -m) != 'x86_64' ]]; then
+    echo -n "{}"
+    exit 1
+fi
+
 url=$(/sbin/e-smith/config getprop subscription ApiUrl | sed 's/\/$//')
 json=$(mktemp)
 curl="curl -s -L --connect-timeout 5 -o $json"
