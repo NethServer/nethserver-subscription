@@ -7,6 +7,9 @@ Facter.add('backup') do
         backup = {}
         # Find most recent log file
         log_file = Dir.glob("/var/log/backup/backup-*").max_by {|f| File.mtime(f)}
+        if log_file == nil
+            next backup
+        end
 
         # Extract name
         parts = log_file.split('-')
