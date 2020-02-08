@@ -69,6 +69,7 @@ NethServer Subscriptions UI
 %defattr(-,root,root)
 %doc COPYING
 %doc README.rst
+%attr(0440,root,root) /etc/sudoers.d/20_nethserver_subscription
 
 %changelog
 * Mon Nov 04 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.5.3-1
