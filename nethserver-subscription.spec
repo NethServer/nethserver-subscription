@@ -1,6 +1,6 @@
 Summary: NethServer Subscriptions
 Name: nethserver-subscription
-Version: 3.5.4
+Version: 3.6.0
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -72,6 +72,9 @@ NethServer Subscriptions UI
 %doc README.rst
 
 %changelog
+* Tue May 05 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.6.0-1
+- NethServer 7.8.2003
+
 * Wed Mar 18 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.5.4-1
 - Bad sudoers permission - Bug NethServer/dev#6081
 
