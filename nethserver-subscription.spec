@@ -1,6 +1,6 @@
 Summary: NethServer Subscriptions
 Name: nethserver-subscription
-Version: 3.6.0
+Version: 3.6.1
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -75,6 +75,9 @@ NethServer Subscriptions UI
 %doc README.rst
 
 %changelog
+* Wed May 06 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.6.1-1
+- Upgrade blocked by sclo-php71-php-pecl-imagick - Bug NethServer/dev#6156
+
 * Tue May 05 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.6.0-1
 - NethServer 7.8.2003
 
