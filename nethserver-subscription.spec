@@ -23,6 +23,9 @@ Requires: curl
 Requires: jq
 Requires: %{name}-inventory
 
+# HACK: allow upgrade from NS 7.7 where sclo-php71-php-pecl-imagick was installed
+Obsoletes: sclo-php71-php-pecl-imagick <= 3.4.4
+
 %description
 NethServer Subscriptions
 
