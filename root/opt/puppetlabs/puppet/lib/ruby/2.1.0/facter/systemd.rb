@@ -22,7 +22,6 @@ Facter.add('systemd') do
     confine osfamily: 'RedHat'
     setcode do
         systemd = {
-            "timestamp" => Time.now.to_i,
             "restart" => {}
         }
         tmp = Facter::Core::Execution.execute("zgrep ', status=' /var/log/messages* | awk '{print $6,$11}' | sort | uniq -c")
