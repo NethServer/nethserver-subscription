@@ -24,7 +24,7 @@ Facter.add('systemd') do
         systemd = {
             "restart" => {}
         }
-        tmp = Facter::Core::Execution.execute("zgrep ', status=' /var/log/messages* | awk '{print $6,$11}' | sort | uniq -c")
+        tmp = Facter::Core::Execution.execute("zgrep ', status=' /var/log/messages* | awk '{print $6,$11}' | sort | uniq -c", :timeout => 60)
         tmp.split(/(\s+)?\n(\s+)?/).each do |record|
             fields = record.split(/\s+/)
             if fields.length() < 3 || !fields[2].start_with?('status=') then
