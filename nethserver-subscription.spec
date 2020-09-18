@@ -1,6 +1,6 @@
 Summary: NethServer Subscriptions
 Name: nethserver-subscription
-Version: 3.6.2
+Version: 3.6.3
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -75,6 +75,9 @@ NethServer Subscriptions UI
 %doc README.rst
 
 %changelog
+* Fri Sep 18 2020 Davide Principi <davide.principi@nethesis.it> - 3.6.3-1
+- Collect facts for systemd restart (on-failure) events - nethesis/dev#5854
+
 * Fri Jul 17 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.6.2-1
 - Cockpit: enhance rebranding - nethesis/dev#5843
 
