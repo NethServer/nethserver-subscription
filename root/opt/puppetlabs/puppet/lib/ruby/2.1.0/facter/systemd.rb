@@ -26,7 +26,7 @@ Facter.add('systemd') do
             "error" => ""
         }
         begin
-            tmp = Facter::Core::Execution.execute("zgrep ', status=' /var/log/messages* | awk '{print $6,$11}' | sort | uniq -c", :timeout => 60)
+            tmp = Facter::Core::Execution.execute("nice zgrep ', status=' $(find  /var/log/ -maxdepth 1 -name 'message*' -newermt $(date -d '1 months ago' +@%s)) | awk '{print $6,$11}' | sort | uniq -c", :timeout => 60)
         rescue => error
             tmp = ""
             systemd["error"] = error.message
