@@ -40,7 +40,7 @@ cp -a lib/nethserver_alerts.py root%{python2_sitelib}
 
 %install
 (cd root; find . -depth -print | sed \
-        -e '\|^/opt| d' \
+        -e '\|^\./opt| d' \
         -e '\|/etc/cron.daily/nethserver-inventory| d' \
         -e '\|/usr/sbin/nethserver-inventory| d' \
         -e '\|/usr/sbin/ardad| d' \
