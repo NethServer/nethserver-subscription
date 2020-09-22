@@ -22,14 +22,12 @@ Facter.add('systemd') do
     confine osfamily: 'RedHat'
     setcode do
         systemd = {
-            "restart" => {},
-            "error" => ""
+            "restart" => {}
         }
         begin
             tmp = Facter::Core::Execution.execute("find /var/log/ -maxdepth 1 -name 'messages*' -newermt $(date -d '1 months ago' +@%s) | xargs -- nice zgrep ', status=' |  awk '{print $6,$11}' | sort | uniq -c", :timeout => 60)
-        rescue => error
+        rescue Facter::Core::Execution::ExecutionFailure
             tmp = ""
-            systemd["error"] = error.message
         end
         tmp.split(/(\s+)?\n(\s+)?/).each do |record|
             fields = record.split(/\s+/)
