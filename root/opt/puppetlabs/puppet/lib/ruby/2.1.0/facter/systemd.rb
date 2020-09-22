@@ -22,7 +22,7 @@ Facter.add('systemd') do
     confine osfamily: 'RedHat'
     setcode do
         systemd = {
-            "restart" => {}
+            "restart" => {},
             "error" => ""
         }
         begin
