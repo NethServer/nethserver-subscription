@@ -1,6 +1,6 @@
 Summary: NethServer Subscriptions
 Name: nethserver-subscription
-Version: 3.6.3
+Version: 3.6.4
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -75,6 +75,9 @@ NethServer Subscriptions UI
 %doc README.rst
 
 %changelog
+* Tue Sep 22 2020 Davide Principi <davide.principi@nethesis.it> - 3.6.4-1
+- Systemd fact cron job error - Bug NethServer/dev#6278
+
 * Fri Sep 18 2020 Davide Principi <davide.principi@nethesis.it> - 3.6.3-1
 - Collect facts for systemd restart (on-failure) events - nethesis/dev#5854
 
