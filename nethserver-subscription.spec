@@ -40,15 +40,15 @@ cp -a lib/nethserver_alerts.py root%{python2_sitelib}
 
 %install
 (cd root; find . -depth -print | sed \
+        -e '\|^/opt| d' \
         -e '\|/etc/cron.daily/nethserver-inventory| d' \
         -e '\|/usr/sbin/nethserver-inventory| d' \
         -e '\|/usr/sbin/ardad| d' \
         -e '\|/etc/e-smith/events/actions/nethserver-inventory-send| d' \
     | cpio -dump %{buildroot})
 %{genfilelist} \
-    --ignoredir '/opt' %{buildroot} \
     --file /etc/sudoers.d/20_nethserver_subscription 'attr(0440,root,root)' \
-    > filelist
+    %{buildroot} > filelist
 
 # 1. Split UI parts from core package
 grep -E ^%{_nsuidir}/ filelist > filelist-ui
