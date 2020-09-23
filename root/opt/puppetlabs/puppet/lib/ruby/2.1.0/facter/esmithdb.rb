@@ -7,7 +7,7 @@ Facter.add('esmithdb') do
     setcode do
         dbs = {}
         Dir.entries('/var/lib/nethserver/db').each do |db|
-            next if (db == '.') || (db == '..')
+            next if (db =~ /^\./)
             tmp = Facter::Core::Execution.exec("/sbin/e-smith/db #{db} printjson")
             data = JSON.parse(tmp)
             data.each_with_index do |item, index|
