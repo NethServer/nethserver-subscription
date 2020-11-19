@@ -1,6 +1,6 @@
 Summary: NethServer Subscriptions
 Name: nethserver-subscription
-Version: 3.6.5
+Version: 3.6.6
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -75,6 +75,9 @@ NethServer Subscriptions UI
 %doc README.rst
 
 %changelog
+* Thu Nov 19 2020 Davide Principi <davide.principi@nethesis.it - 3.6.6-1
+- NS 7.9.2009 rollout task list - NethServer/dev#6330
+
 * Tue Sep 29 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.6.5-1
 - my.nethesis: no inventory data - Bug nethesis/dev#5874
 
