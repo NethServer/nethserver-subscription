@@ -25,7 +25,7 @@ env:
 
 script: >
     version=$(sed -n -r '/^Version:/ { s/Version: +// ; p }' nethserver-subscription.spec) ;
-    sed -r -i "/^Version:/ s/Version:.*/Version: ${version}/" nethserver-subscription-inventory.spec ;
+    sed -r "/^Version:/ s/Version:.*/Version: ${version}/" nethserver-subscription-inventory.spec.in > nethserver-subscription-inventory.spec ;
     sed -r -n '/^%changelog/,$ p' nethserver-subscription.spec >> nethserver-subscription-inventory.spec ;
     for spec in nethserver-subscription-inventory.spec nethserver-subscription.spec; do
     docker run -ti --name makerpms-${spec} ${EVARS}
