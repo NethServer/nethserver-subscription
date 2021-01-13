@@ -15,6 +15,14 @@ NAME=${2}
 PREVSTATE=${15}
 TIMESTAMP=${16}
 
+interface=$(/sbin/e-smith/db networks getprop $NAME interface)
+if [ -n "$interface" ]; then
+    label=$(/sbin/e-smith/db networks getprop $interface nslabel)
+    if [ -n "$label" ]; then
+        NAME=$label
+    fi
+fi
+
 hostname=$(hostname)
 severity=""
 
