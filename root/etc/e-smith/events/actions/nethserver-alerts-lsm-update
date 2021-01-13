@@ -16,9 +16,9 @@ PREVSTATE=${15}
 TIMESTAMP=${16}
 
 interface=$(/sbin/e-smith/db networks getprop $NAME interface)
-if [ ! -z $interface ]; then
+if [ -n "$interface" ]; then
     label=$(/sbin/e-smith/db networks getprop $interface nslabel)
-    if [ ! -z $label ]; then
+    if [ -n "$label" ]; then
         NAME=$label
     fi
 fi
