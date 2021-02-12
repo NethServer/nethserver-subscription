@@ -10,6 +10,10 @@
         @repo_list = qw(
             sb-nethserver-updates
         );
+        if ($subscription{'ExtraRepositories'}) {
+            my @ExtraRepositories = split(',',$subscription{'ExtraRepositories'});
+            push (@repo_list, @ExtraRepositories);
+        }
     }
     '';
 }
