@@ -15,6 +15,10 @@
             "sb-nethserver-base",
             "sb-nethserver-updates",
         );
+        if ($subscription{'ExtraRepositories'}) {
+            my @ExtraRepositories = split(',',$subscription{'ExtraRepositories'});
+            push (@repos, @ExtraRepositories);
+        }
     }
 
     '';

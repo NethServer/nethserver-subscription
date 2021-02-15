@@ -27,6 +27,7 @@ Properties:
 - ``SiteUrl``: Product website URL
 - ``DocsUrl``: Product documentation URL
 - ``HelpdeskUrl``: Product helpdesk URL
+- ``ExtraRepositories``: Enable extra repositories in the subscription (comma separated : nethforge,repoA,repoB).
 
 Example: ::
 
@@ -86,6 +87,17 @@ initial state and use the original NethServer repositories run ::
 
   config setprop subscription SystemId '' Secret ''
   signal-event software-repos-save
+
+Enable extra repositories in subscription
+-----------------------------------------
+
+If you need to enable an extra repository like NethForge, you can do it by the command line ::
+
+  config setprop subscription ExtraRepositories nethforge
+  signal-event software-repos-save
+
+The list of repositories (comma separated : nethforge,repoA,repoB) must match a valid repository definition list in `/etc/yum.repos.d`. 
+Beware it is case sensitive.
 
 Events
 ======
