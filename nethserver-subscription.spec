@@ -1,6 +1,6 @@
 Summary: NethServer Subscriptions
 Name: nethserver-subscription
-Version: 3.6.7
+Version: 3.6.8
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -75,6 +75,9 @@ NethServer Subscriptions UI
 %doc README.rst
 
 %changelog
+* Wed Feb 17 2021 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.6.8-1
+- Subscription: Enable extra repositories inside the subscription - NethServer/dev#6427
+
 * Thu Jan 14 2021 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.6.7-1
 - MultiWAN: add provider name to WAN alerts - NethServer/dev#6392
 
