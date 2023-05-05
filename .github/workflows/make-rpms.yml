@@ -53,7 +53,7 @@ jobs:
               if [[ "${{ secrets.endpoints_pack }}" && "${{ secrets.secret }}" ]]; then
                   echo "Publish configuration exists, pushing package $spec to repo."
                   docker commit makerpms nethserver/build
-                  docker --rm run \
+                  docker run --rm \
                   --env-file .env \
                   nethserver/build \
                   uploadrpms-github
