@@ -37,6 +37,10 @@ jobs:
         run: if test -f "prep-sources"; then ./prep-sources; fi
       - name: Build RPM and publish
         run: |
+          echo "Preparing nethserver-subscription-inventory.spec..."
+          version=$(sed -n -r '/^Version:/ { s/Version: +// ; p }' nethserver-subscription.spec) ;
+          sed -r "/^Version:/ s/Version:.*/Version: ${version}/" nethserver-subscription-inventory.spec.in > nethserver-subscription-inventory.spec ;
+          sed -r -n '/^%changelog/,$ p' nethserver-subscription.spec >> nethserver-subscription-inventory.spec ;
           echo "Starting build..."
           docker run --name makerpms \
             --env-file .env \
