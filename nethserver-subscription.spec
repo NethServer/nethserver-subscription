@@ -1,6 +1,6 @@
 Summary: NethServer Subscriptions
 Name: nethserver-subscription
-Version: 3.6.8
+Version: 3.6.9
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -75,6 +75,9 @@ NethServer Subscriptions UI
 %doc README.rst
 
 %changelog
+* Fri May 05 2023 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.6.9-1
+- Add public_ip fact: this is now used inside my.nethesis.it
+
 * Wed Feb 17 2021 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.6.8-1
 - Subscription: Enable extra repositories inside the subscription - NethServer/dev#6427
 
