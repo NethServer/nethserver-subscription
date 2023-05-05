@@ -43,7 +43,7 @@ jobs:
           sed -r -n '/^%changelog/,$ p' nethserver-subscription.spec >> nethserver-subscription-inventory.spec ;
           for spec in nethserver-subscription-inventory.spec nethserver-subscription.spec; do
               echo "Starting build: $spec"
-              docker run --name makerpms \
+              docker run --name "makerpms_$spec" \
                 --env-file .env \
                 --hostname $GITHUB_RUN_ID-$GITHUB_RUN_NUMBER.nethserver.org \
                 --volume $PWD:/srv/makerpms/src:ro \
@@ -52,8 +52,8 @@ jobs:
               echo "Build succesful: $spec"
               if [[ "${{ secrets.endpoints_pack }}" && "${{ secrets.secret }}" ]]; then
                   echo "Publish configuration exists, pushing package $spec to repo."
-                  docker commit "makerpms nethserver/build/$spec"
-                  docker run --rm \
+                  docker commit "makerpms_$spec" nethserver/build
+                  docker run \
                   --env-file .env \
                   nethserver/build \
                   uploadrpms-github
