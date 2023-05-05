@@ -52,7 +52,7 @@ jobs:
               echo "Build succesful: $spec"
               if [[ "${{ secrets.endpoints_pack }}" && "${{ secrets.secret }}" ]]; then
                   echo "Publish configuration exists, pushing package $spec to repo."
-                  docker commit makerpms nethserver/build
+                  docker commit "makerpms nethserver/build/$spec"
                   docker run --rm \
                   --env-file .env \
                   nethserver/build \
