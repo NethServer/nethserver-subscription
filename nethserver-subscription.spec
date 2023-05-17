@@ -1,6 +1,6 @@
 Summary: NethServer Subscriptions
 Name: nethserver-subscription
-Version: 3.6.9
+Version: 3.6.10
 Release: 1%{?dist}
 License: GPL
 URL: %{url_prefix}/%{name}
@@ -75,6 +75,9 @@ NethServer Subscriptions UI
 %doc README.rst
 
 %changelog
+* Wed May 17 2023 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.6.10-1
+- Inventory: bad public IPv4 address - Bug NethServer/dev#6478
+
 * Fri May 05 2023 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 3.6.9-1
 - Add public_ip fact: this is now used inside my.nethesis.it
 
